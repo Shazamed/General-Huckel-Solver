@@ -40,12 +40,13 @@ def degen_check(e_values):
         else:
             degen_dict.setdefault(e_value1,1) # if values does not match do nothing. If key does not exist, set the default value as 1.
     
-    output = "Energy|Degeneracies\n" #
+    output = "Energy      | Degeneracies\n" \
+             "--------------------------\n"
     for key, value in reversed(degen_dict.items()): # generate a string to display the energies and degeneracies
         if key*-1 >= 0:
-            output += f'α+{abs(-1*key)}β: {value}\n'
+            output += f'α+{str(abs(-1*key))+'β':<9} | {value}\n'
         else:
-            output += f'α{-1*key}β: {value}\n'
+            output += f'α-{str(abs(-1*key))+'β':<9} | {value}\n'
     print(output)
     return output
 
@@ -97,13 +98,15 @@ def icosahedron_mat():
 def buckyball_mat():
     with open("buckyball.txt", 'r') as f:
         buckyball_text = f.read()
-        buckyball_mat = np.genfromtxt(StringIO(buckyball_text), delimiter=" ")
-        return buckyball_mat
+        mat = np.genfromtxt(StringIO(buckyball_text), delimiter=" ")
+        mat = mat*beta
+        return mat
     
 def solve_mat(mat):
     evals, evects = lin.eigh(mat)
     output = degen_check(evals)
     save_output(output) 
+    # print(evects)
 
 
 
