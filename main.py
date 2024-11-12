@@ -2,6 +2,7 @@ import numpy as np
 import scipy.linalg as lin
 import networkx as nx
 from io import StringIO
+import os
 
 alpha = 0
 beta = -1
@@ -96,7 +97,8 @@ def icosahedron_mat():
     return mat
 
 def buckyball_mat():
-    with open("buckyball.txt", 'r') as f:
+    script_dir_path = os.path.dirname(os.path.abspath(__file__))
+    with open(script_dir_path+"/buckyball.txt", 'r') as f: # Truncated Icosahedral adjacency matrix from https://houseofgraphs.org/graphs/1389
         buckyball_text = f.read()
         mat = np.genfromtxt(StringIO(buckyball_text), delimiter=" ")
         mat = mat*beta
