@@ -30,7 +30,7 @@ def degen_check(e_values):
     for i in range(len(e_values)): # Using a sliding window to check the sorted eigenvalues for repeats
         e_value1 = round(e_values[i],5) # first value of sliding window
 
-        if i == len(e_values)-1: # if reach end of e_values list, make a dictionary item if there isnt any key 
+        if i == len(e_values)-1: # if reach end of e_values list, make a dictionary item if there isnt any key and set value to 1
             degen_dict.setdefault(e_value1,1)
             break 
 
@@ -150,6 +150,3 @@ if selection == 1 or selection == 2: # check if linear or cyclic polyenes is sel
     solve_mat(function_list[selection-1](int(orbital_num_selection)))
 else:
     solve_mat(function_list[selection-1]())
-
-
-
